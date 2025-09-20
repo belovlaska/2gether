@@ -1,0 +1,1 @@
+PGPASSWORD=togetherpassword psql -h localhost -p 5432 -U togetheruser -d together

@@ -1,0 +1,8 @@
+[(#{message.mail.confirm_user.txt.title})]
+======================================
+
+[(#{message.mail.confirm_user.txt.hi})], [(${user.username})].
+
+[(#{message.mail.confirm_user.txt.clickLink})]
+
+[(${confirmationLink})]
