@@ -1,0 +1,36 @@
+```
+# Java/Maven/Gradle
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar
+*.tar.gz
+target/
+build/
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Dependencies
+lib/
+node_modules/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Test coverage
+jacoco/
+coverage/
+```

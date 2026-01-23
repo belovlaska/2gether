@@ -17,4 +17,5 @@ public class DrinkPolicy extends CrudPolicy<Drink> {
   public String getPolicySubject() {
     return "drink";
   }
+
 }
