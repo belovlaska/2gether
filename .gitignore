@@ -12,6 +12,31 @@ __pycache__/
 build/
 dist/
 target/
+# Compiled and build artifacts
+*.class
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.out
+target/
+
+# Dependencies
+.gradle/
+**/node_modules/
+**/venv/
+**/__pycache__/
+**/.mypy_cache/
+**/.pytest_cache/
+**/dist/
+**/build/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
 
 # Environment
 .env
@@ -41,6 +66,10 @@ Thumbs.db
 *.a
 *.obj
 *.out
+
+# OS specific
+.DS_Store
+Thumbs.db
 
 # Coverage
 coverage/

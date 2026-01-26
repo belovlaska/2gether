@@ -6,8 +6,9 @@ import lombok.*;
 import jakarta.persistence.*;
 import ru.ifmo.is.together.cafe.Cafe;
 import ru.ifmo.is.together.common.framework.CrudEntity;
-import ru.ifmo.is.together.users.User;
+import ru.ifmo.is.together.tastes.Taste;
 
+import java.util.Set;
 
 @Entity
 @Getter
@@ -33,11 +34,16 @@ public class Hookah extends CrudEntity {
   @Column(name = "cost")
   private Integer cost;
 
-  @Column(name = "taste", length = 30)
-  private String taste;
-
   @ManyToOne
   @JoinColumn(name = "cafe_id")
   private Cafe cafe;
+
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+      name = "hookah_tastes",
+      joinColumns = @JoinColumn(name = "hookah_id"),
+      inverseJoinColumns = @JoinColumn(name = "taste_id")
+  )
+  private Set<Taste> tastes;
 
 }

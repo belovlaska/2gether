@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ru.ifmo.is.together.cafe.Cafe;
 import ru.ifmo.is.together.common.framework.CrudEntity;
+import ru.ifmo.is.together.genres.Genre;
+
+import java.util.Set;
 
 @Entity
 @Getter
@@ -26,9 +29,6 @@ public class Game extends CrudEntity {
   @Column(name = "name", nullable = false, length = 20)
   private String name;
 
-  @Column(name = "genre", length = 200)
-  private String genre;
-
   @Column(name = "age_constraint")
   private Integer age_constraint;
 
@@ -39,5 +39,13 @@ public class Game extends CrudEntity {
   @ManyToOne
   @JoinColumn(name = "cafe_id")
   private Cafe cafe;
+
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+      name = "game_genres",
+      joinColumns = @JoinColumn(name = "game_id"),
+      inverseJoinColumns = @JoinColumn(name = "genre_id")
+  )
+  private Set<Genre> genres;
 
 }

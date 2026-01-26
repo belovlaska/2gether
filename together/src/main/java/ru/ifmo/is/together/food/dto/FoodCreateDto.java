@@ -1,14 +1,14 @@
 package ru.ifmo.is.together.food.dto;
 
 import lombok.Data;
-import ru.ifmo.is.together.cafe.dto.CafeDto;
-import ru.ifmo.is.together.users.dto.UserDto;
+
+import java.util.Set;
 
 @Data
 public class FoodCreateDto {
 
   private String name;
-  private String ingredients;
+  private Set<Long> ingredientIds;
   private Integer cost;
   private Boolean isHot;
   private Boolean isSpicy;
