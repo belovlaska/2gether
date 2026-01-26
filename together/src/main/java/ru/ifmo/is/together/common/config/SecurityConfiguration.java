@@ -44,13 +44,19 @@ public class SecurityConfiguration {
       // Отключаем CORS
       .cors(cors -> cors.configurationSource(request -> {
         var corsConfiguration = new CorsConfiguration();
+        // Explicitly define allowed origins instead of using wildcard
         corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:5000", clientHost));
+        // Limit HTTP methods to only what's necessary
         corsConfiguration.setAllowedMethods(List.of(
-          "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD", "CONNECT", "OPTIONS")
+          "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
         );
-        corsConfiguration.setAllowedHeaders(List.of("*"));
+        // Be specific about allowed headers instead of using wildcard
+        corsConfiguration.setAllowedHeaders(List.of(
+          "Authorization", "Content-Type", "Accept", "X-Requested-With", "X-Response-Uuid", "X-Total-Count"
+        ));
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setMaxAge(10L);
+        // Set reasonable max age for preflight requests (3600 seconds = 1 hour)
+        corsConfiguration.setMaxAge(3600L);
         corsConfiguration.addExposedHeader("X-Response-Uuid");
         corsConfiguration.addExposedHeader("X-Total-Count");
         return corsConfiguration;
