@@ -152,8 +152,21 @@ dependencyCheck {
     ]
 }
 
+// SpotBugs configuration with find-sec-bugs plugin for security scanning
 spotbugs {
   toolVersion = '4.8.3'
+  // Include find-sec-bugs plugin for security vulnerability detection
+  plugins {
+    create("findsecbugs") {
+      artifact = "com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0"
+    }
+  }
+  // Increase effort for more thorough analysis
+  effort = "max"
+  // Report all bug categories including security issues
+  reportLevel = "high"
+  // Enable all bug detectors including security ones
+  includeFilter.setFrom("$rootDir/config/spotbugs-security-exclude.xml")
 }
 
 spotbugsMain {
@@ -166,6 +179,12 @@ spotbugsMain {
       required = true
       outputLocation = file("$buildDir/reports/spotbugs/main/spotbugs.xml")
     }
+  }
+  // Fail build on critical security issues
+  if (project.hasProperty('failOnSpotBugs')) {
+    ignoreFailures = false
+  } else {
+    ignoreFailures = true  // Set to false in production to fail on security issues
   }
 }
 
@@ -180,6 +199,36 @@ spotbugsTest {
       outputLocation = file("$buildDir/reports/spotbugs/test/spotbugs.xml")
     }
   }
+}
+
+// Create a dedicated task for security analysis that fails on high priority issues
+task spotbugsSecurity(type: com.github.spotbugs.snom.SpotBugsTask) {
+  group = 'verification'
+  description = 'Run SpotBugs security scan with strict rules'
+  
+  classes = files("$buildDir/classes/java/main")
+  sourceSets = [project.extensions.getByType(JavaPluginExtension).sourceSets.main]
+  classpath = project.sourceSets.main.runtimeClasspath
+  
+  reports {
+    xml.required = true
+    html.required = true
+    html.outputLocation = file("$buildDir/reports/spotbugs/security-report.html")
+  }
+  
+  // Strict mode: fail on high/critical security issues
+  ignoreFailures = false
+  effort = "max"
+  reportLevel = "high"
+  
+  plugins {
+    create("findsecbugs") {
+      artifact = "com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0"
+    }
+  }
+  
+  // Only include security-related detectors
+  includeFilter.setFrom("$rootDir/config/spotbugs-security-only.xml")
 }
 
 sonarqube {

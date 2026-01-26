@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+  <!-- Only include security-related bug patterns -->
+  <Match>
+    <!-- Security: SQL Injection -->
+    <Bug category="SECURITY"/>
+    <Bug pattern="SQL_INJECTION_SERVLET"/>
+    <Bug pattern="SQL_NONCONSTANT_STRING_PASSED_TO_EXECUTE"/>
+    <Bug pattern="SQL_PREPARED_STATEMENT_GENERATED_FROM_NONCONSTANT_STRING"/>
+    
+    <!-- Security: Command Injection -->
+    <Bug pattern="COMMAND_INJECTION"/>
+    <Bug pattern="PATH_MANIPULATION"/>
+    <Bug pattern="UNVALIDATED_REDIRECT"/>
+    
+    <!-- Security: Weak Cryptography -->
+    <Bug pattern="WEAK_MESSAGE_DIGEST_MD5"/>
+    <Bug pattern="WEAK_MESSAGE_DIGEST_SHA1"/>
+    <Bug pattern="HARD_CODE_PASSWORD"/>
+    <Bug pattern="CRYPTO_USE_OF_WEAK_HASH"/>
+    <Bug pattern="CRYPTO_CREDENTIALS"/>
+    <Bug pattern="SSL_CONTEXT"/>
+    <Bug pattern="WEAK_TRUST_MANAGER"/>
+    <Bug pattern="WEAK_HOSTNAME_VERIFIER"/>
+    
+    <!-- Security: XSS -->
+    <Bug pattern="XSS_REQUEST_PARAMETER_TO_SEND_ERROR"/>
+    <Bug pattern="XSS_REQUEST_PARAMETER_TO_SERVLET_WRITER"/>
+    <Bug pattern="XSS_REQUEST_PARAMETER_TO_JSP_WRITER"/>
+    
+    <!-- Security: Others -->
+    <Bug pattern="TRUST_BOUNDARY_VIOLATION"/>
+    <Bug pattern="UNSAFE_REFLECTION"/>
+    <Bug pattern="FILE_UPLOAD_FILENAME"/>
+  </Match>
+</FindBugsFilter>
