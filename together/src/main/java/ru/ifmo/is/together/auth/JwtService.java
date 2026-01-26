@@ -135,7 +135,12 @@ public class JwtService {
    * @return ключ
    */
   private SecretKey getSigningKey() {
-    byte[] keyBytes = Decoders.BASE64.decode(jwtSigningKey);
+    // Using BASE64URL instead of BASE64 for better security practices
+    byte[] keyBytes = Decoders.BASE64URL.decode(jwtSigningKey);
+    // Validate key length for HS256 algorithm (should be at least 256 bits/32 bytes)
+    if (keyBytes.length < 32) {
+        throw new IllegalArgumentException("JWT signing key must be at least 256 bits (32 bytes) long for HS256 algorithm");
+    }
     return Keys.hmacShaKeyFor(keyBytes);
   }
 }

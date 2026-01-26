@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+  <!-- Exclude non-security related bugs but keep security ones -->
+  <Match>
+    <!-- Exclude performance and style issues -->
+    <Bug category="PERFORMANCE"/>
+    <Bug category="STYLE"/>
+    <Bug category="CORRECTNESS"/>
+    <Bug category="MALICIOUS_CODE"/>
+    <Bug category="MT_CORRECTNESS"/>
+    <Bug category="NOISE"/>
+    <Bug category="EXPERIMENTAL"/>
+  </Match>
+  
+  <!-- But still include security issues -->
+  <Match>
+    <Bug category="SECURITY"/>
+    <Bug pattern="SQL_INJECTION_SERVLET"/>
+    <Bug pattern="SQL_NONCONSTANT_STRING_PASSED_TO_EXECUTE"/>
+    <Bug pattern="SQL_PREPARED_STATEMENT_GENERATED_FROM_NONCONSTANT_STRING"/>
+    <Bug pattern="COMMAND_INJECTION"/>
+    <Bug pattern="PATH_MANIPULATION"/>
+    <Bug pattern="UNVALIDATED_REDIRECT"/>
+    <Bug pattern="WEAK_MESSAGE_DIGEST_MD5"/>
+    <Bug pattern="WEAK_MESSAGE_DIGEST_SHA1"/>
+    <Bug pattern="HARD_CODE_PASSWORD"/>
+    <Bug pattern="CRYPTO_USE_OF_WEAK_HASH"/>
+    <Bug pattern="CRYPTO_CREDENTIALS"/>
+    <Bug pattern="SSL_CONTEXT"/>
+    <Bug pattern="WEAK_TRUST_MANAGER"/>
+    <Bug pattern="WEAK_HOSTNAME_VERIFIER"/>
+    <Bug pattern="XSS_REQUEST_PARAMETER_TO_SEND_ERROR"/>
+    <Bug pattern="XSS_REQUEST_PARAMETER_TO_SERVLET_WRITER"/>
+    <Bug pattern="XSS_REQUEST_PARAMETER_TO_JSP_WRITER"/>
+    <Bug pattern="TRUST_BOUNDARY_VIOLATION"/>
+    <Bug pattern="UNSAFE_REFLECTION"/>
+    <Bug pattern="FILE_UPLOAD_FILENAME"/>
+  </Match>
+</FindBugsFilter>
