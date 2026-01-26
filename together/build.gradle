@@ -4,6 +4,7 @@ plugins {
   id 'io.spring.dependency-management' version '1.1.6'
   id 'org.flywaydb.flyway' version '9.8.1'
   id 'jacoco'
+  id 'org.sonarqube' version '5.1.0.4882'
 }
 
 group = 'ru.ifmo.is'
@@ -128,5 +129,18 @@ tasks.named('test') {
   useJUnitPlatform()
   testLogging {
     exceptionFormat = 'full'
+  }
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "together-project"
+    property "sonar.projectName", "Together Application"
+    property "sonar.projectVersion", "1.0"
+    property "sonar.sourceEncoding", "UTF-8"
+    property "sonar.sources", "src/main/java"
+    property "sonar.tests", "src/test/java"
+    property "sonar.java.coveragePlugin", "jacoco"
+    property "sonar.jacoco.reportPaths", "${buildDir}/jacoco/test.exec"
   }
 }

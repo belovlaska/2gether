@@ -18,7 +18,6 @@ import ru.ifmo.is.together.cafe.CafeService;
 import ru.ifmo.is.together.common.errors.ResourceNotFoundException;
 import ru.ifmo.is.together.common.search.SearchDto;
 import ru.ifmo.is.together.food.dto.*;
-import ru.ifmo.is.together.users.UserService;
 
 
 @RestController

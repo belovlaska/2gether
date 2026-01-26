@@ -18,7 +18,6 @@ import ru.ifmo.is.together.common.errors.ResourceNotFoundException;
 import ru.ifmo.is.together.common.search.SearchDto;
 
 import ru.ifmo.is.together.hookah.dto.*;
-import ru.ifmo.is.together.users.UserService;
 
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -62,8 +61,8 @@ public class HookahController {
   @Operation(summary = "Создать кальян для кафе", security = @SecurityRequirement(name = "bearerAuth"))
   public ResponseEntity<HookahDto> create(@PathVariable int cafeId, @Valid @RequestBody HookahCreateDto dto) {
     var cafe = cafeService.findById(cafeId).orElseThrow(() -> new ResourceNotFoundException("Cafe not found: " + cafeId));
-    var food = service.create(dto, cafe);
-    return ResponseEntity.status(HttpStatus.CREATED).body(food);
+    var hookah = service.create(dto, cafe);
+    return ResponseEntity.status(HttpStatus.CREATED).body(hookah);
   }
 
 

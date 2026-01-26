@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.ifmo.is.together.cafe.CafeService;
 import ru.ifmo.is.together.common.errors.ResourceNotFoundException;
 import ru.ifmo.is.together.common.search.SearchDto;
-import ru.ifmo.is.together.food.FoodService;
-import ru.ifmo.is.together.food.dto.FoodCreateDto;
-import ru.ifmo.is.together.food.dto.FoodDto;
 import ru.ifmo.is.together.game.dto.GameCreateDto;
 import ru.ifmo.is.together.game.dto.GameDto;
 
@@ -52,7 +49,7 @@ public class GameController {
   @Operation(summary = "Получить все игры кафе")
   public ResponseEntity<Page<GameDto>> cafeGame(@PathVariable int cafeId, @PageableDefault(size = 20) Pageable pageable) {
     var cafe = cafeService.findById(cafeId).orElseThrow(() -> new ResourceNotFoundException("Cafe not found: " + cafeId));
-    var game = service.getCafeFood(cafe, pageable);
+    var game = service.getCafeGame(cafe, pageable);
     return ResponseEntity.ok()
       .header("X-Total-Count", String.valueOf(game.getTotalElements()))
       .body(game);
