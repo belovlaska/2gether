@@ -1,36 +1,55 @@
-```
-# Java/Maven/Gradle
-*.class
-*.jar
-*.war
-*.ear
-*.zip
-*.tar
-*.tar.gz
-target/
-build/
-.gradle/
-!gradle/wrapper/gradle-wrapper.jar
+```markdown
+# Migration scripts backup/exports
+*.sql.bak
+*.sql.backup
+*.sql~
 
-# Dependencies
-lib/
-node_modules/
+# Database dumps
+*.dump
+*.dmp
+*.db
+*.sqlite
+*.sqlite3
 
 # IDE
-.idea/
-*.iml
-*.ipr
-*.iws
 .vscode/
+.idea/
 
-# System
-.DS_Store
-Thumbs.db
+# Environment
+.env
+.env.local
+.env.*
 
 # Logs
 *.log
 
-# Test coverage
-jacoco/
-coverage/
+# Build artifacts (if any Java/Spring Boot project)
+target/
+*.class
+*.jar
+*.war
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+.venv/
+venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 ```
