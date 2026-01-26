@@ -1,0 +1,68 @@
+package ru.ifmo.is.together.common.controller;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import ru.ifmo.is.together.cafe.CafeService;
+import ru.ifmo.is.together.common.errors.ResourceNotFoundException;
+
+/**
+ * Базовый класс для контроллеров сущностей, связанных с кафе
+ */
+public abstract class BaseCafeEntityController<T, CREATE_DTO, UPDATE_DTO, DTO> {
+    
+    protected final CafeService cafeService;
+    
+    public BaseCafeEntityController(CafeService cafeService) {
+        this.cafeService = cafeService;
+    }
+    
+    /**
+     * Метод для получения сущности по ID кафе
+     */
+    protected abstract Page<DTO> getCafeEntities(int cafeId, Pageable pageable);
+    
+    /**
+     * Метод для поиска сущностей по критериям
+     */
+    protected abstract Page<DTO> searchCafeEntities(int cafeId, Pageable pageable, Object searchRequest);
+    
+    /**
+     * Метод для создания сущности
+     */
+    protected abstract DTO createEntity(int cafeId, CREATE_DTO createDto);
+    
+    /**
+     * Метод для удаления сущности
+     */
+    protected abstract boolean deleteEntity(int id);
+    
+    /**
+     * Получение объекта кафе по ID
+     */
+    protected Object getCafeById(int cafeId) {
+        return cafeService.findById(cafeId).orElseThrow(() -> 
+            new ResourceNotFoundException("Cafe not found: " + cafeId));
+    }
+    
+    /**
+     * Создание ответа со списком сущностей
+     */
+    protected ResponseEntity<Page<DTO>> createListResponse(Page<DTO> entities) {
+        return ResponseEntity.ok()
+                .header("X-Total-Count", String.valueOf(entities.getTotalElements()))
+                .body(entities);
+    }
+    
+    /**
+     * Создание ответа на удаление
+     */
+    protected ResponseEntity<Void> createDeleteResponse(boolean deleted) {
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+}
