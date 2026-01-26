@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import ru.ifmo.is.together.cafe.Cafe;
 import ru.ifmo.is.together.common.framework.CrudEntity;
-import ru.ifmo.is.together.users.User;
+import ru.ifmo.is.together.ingredients.Ingredient;
+
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -23,9 +26,6 @@ public class Drink extends CrudEntity{
   @Column(name = "name", length = 20)
   private String name;
 
-  @Column(name = "ingredients", length = 200)
-  private String ingredients;
-
   @Column(name = "cost")
   private Integer cost;
 
@@ -35,6 +35,14 @@ public class Drink extends CrudEntity{
   @ManyToOne
   @JoinColumn(name = "cafe_id")
   private Cafe cafe;
+
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+      name = "drink_ingredients",
+      joinColumns = @JoinColumn(name = "drink_id"),
+      inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+  )
+  private Set<Ingredient> ingredients;
 
 }
 
